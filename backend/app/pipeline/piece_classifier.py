@@ -26,7 +26,7 @@ class PieceClassifier:
 
     def preprocess_crop(self, pil_img: Image.Image) -> np.ndarray:
         """Preprocesses crop image: Resize to 64x64, normalize ImageNet stats, C x H x W float32."""
-        img = pil_img.resize((64, 64), Image.BICUBIC)
+        img = pil_img.resize((64, 64), Image.BILINEAR)  # matches torchvision.transforms.Resize default used in training
         arr = np.array(img).astype(np.float32) / 255.0
 
         # Normalize with ImageNet mean and std
